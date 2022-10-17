@@ -8,22 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
 
-    TextView createnewAccount;
+public class RegisterActivity extends AppCompatActivity {
 
+    TextView txtHasAccount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        createnewAccount= findViewById(R.id.idCreateNewAccount);
+        setContentView(R.layout.activity_register);
+        txtHasAccount= findViewById(R.id.txtHasAccount);
 
-        createnewAccount.setOnClickListener(new View.OnClickListener() {
+
+        txtHasAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( MainActivity.this, RegisterActivity.class));
+                startActivity(new Intent( RegisterActivity.this, MainActivity.class));
             }
         });
-
     }
 }

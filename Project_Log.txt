@@ -3,3 +3,8 @@ Project Log for Team 26 in the SEG2105 Project:
 2022-10-08 Group call held to discuss work moving forwards
 
 2022-10-16 Repository created
+
+2022-10-16 Frederick worked on basic UI. Matthew worked on UML diagrams.
+
+2022-10-17 Frederick Completed basic user interface for login and register.
+

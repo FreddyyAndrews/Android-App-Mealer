@@ -14,16 +14,20 @@ public class RegisterActivity extends AppCompatActivity {
 
     TextView txtHasAccount;
     Button btnRegisterChef;
+    Button btnRegisterUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         txtHasAccount= findViewById(R.id.txtHasAccount);
         btnRegisterChef = findViewById(R.id.btnRegisterChef);
-
+        btnRegisterUser = findViewById(R.id.btnRegisterUser);
         btnRegisterChef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Todo Validate user entries before allowing the user to proceed
+                //For example making sure the passwords match and have at least 6 chars
+                //Save user results once you let them through
                 startActivity(new Intent( RegisterActivity.this, RegisterChef.class));
             }
         });
@@ -34,5 +38,15 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(new Intent( RegisterActivity.this, MainActivity.class));
             }
         });
+
+        btnRegisterUser.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Todo Validate user entries before allowing the user to proceed
+                //For example making sure the passwords match and have at least 6 chars
+                //Save user results once you let them through
+                startActivity(new Intent( RegisterActivity.this, RegisterUser.class));
+            }
+        }));
     }
 }

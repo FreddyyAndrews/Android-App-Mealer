@@ -8,3 +8,5 @@ Project Log for Team 26 in the SEG2105 Project:
 
 2022-10-17 Frederick Completed basic user interface for login and register.
 
+2022-10-19 Frederick Added features to sign in and register. 
+

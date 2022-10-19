@@ -17,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="29dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="25dp"
                 android:fontFamily="@font/aleo_light"
                 android:text="Register"
                 android:textColor="@color/white"
@@ -67,8 +67,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="214dp"
                 android:background="@drawable/input_bg"
                 android:drawableLeft="@drawable/ic_baseline_edit_24"
                 android:drawablePadding="10dp"
@@ -91,8 +91,8 @@
                 android:id="@+id/inputLastName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="214dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/input_bg"
                 android:drawableLeft="@drawable/ic_baseline_edit_24"
@@ -108,9 +108,9 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputFirstName" />
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
                 android:id="@+id/inputPassword"
@@ -123,7 +123,7 @@
                 android:drawableLeft="@drawable/ic_baseline_security_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="Password (At least 6 Characters)"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:paddingTop="13dp"
@@ -188,12 +188,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputPassword2" />
 
             <EditText
-                android:id="@+id/inputCity"
+                android:id="@+id/inputCountry"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/input_bg"
+                android:drawableLeft="@drawable/ic_baseline_outlined_flag_24"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Enter Country"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputCity" />
+
+            <EditText
+                android:id="@+id/inputCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="190dp"
                 android:background="@drawable/input_bg"
                 android:drawableLeft="@drawable/ic_baseline_edit_location_alt_24"
                 android:drawablePadding="10dp"
@@ -207,33 +231,32 @@
                 android:text=""
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/inputProvence"
+                app:layout_constraintEnd_toEndOf="@+id/inputPassword"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/inputPassword"
                 app:layout_constraintTop_toBottomOf="@+id/inputAddress" />
 
             <EditText
                 android:id="@+id/inputProvence"
-                android:layout_width="199dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="190dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="24dp"
                 android:background="@drawable/input_bg"
                 android:drawableLeft="@drawable/ic_baseline_edit_location_alt_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="Enter Provence"
                 android:inputType="textPassword"
-                android:paddingLeft="20dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="13dp"
-                android:paddingRight="20dp"
+                android:paddingRight="8dp"
                 android:paddingBottom="13dp"
                 android:text=""
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/inputCity"
+                app:layout_constraintEnd_toEndOf="@+id/inputPassword"
+                app:layout_constraintStart_toStartOf="@+id/inputPassword"
                 app:layout_constraintTop_toBottomOf="@+id/inputAddress" />
 
             <Button
@@ -241,20 +264,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="190dp"
                 android:background="@drawable/input_bg"
                 android:fontFamily="@font/aleo"
                 android:text="Register as Chef"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/inputPassword"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/inputPassword"
-                app:layout_constraintTop_toBottomOf="@+id/inputProvence" />
+                app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
 
             <Button
                 android:id="@+id/btnRegisterUser"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="190dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/input_bg"
                 android:fontFamily="@font/aleo"
@@ -262,9 +287,9 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/inputPassword"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/inputPassword"
-                app:layout_constraintTop_toBottomOf="@+id/btnRegisterChef" />
+                app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
 
             <TextView
                 android:id="@+id/txtHasAccount"

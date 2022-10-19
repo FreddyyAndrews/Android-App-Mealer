@@ -7,18 +7,19 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView createnewAccount;
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createnewAccount= findViewById(R.id.idCreateNewAccount);
+        btnRegister= findViewById(R.id.btnRegister);
 
-        createnewAccount.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent( MainActivity.this, RegisterActivity.class));

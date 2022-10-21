@@ -10,3 +10,9 @@ Project Log for Team 26 in the SEG2105 Project:
 
 2022-10-19 Frederick Added features to sign in and register. 
 
+2022-10-20 Justin implemented firebase authentication
+
+2022-10-21 Frederick added validation features for register
+
+2022-10-21 Matt completed UML diagrams
+

@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
-                android:fontFamily="@font/aleo_light"
                 android:text="Register as User"
                 android:textColor="@color/white"
                 android:textSize="44sp"
@@ -39,6 +38,7 @@
                 app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+<!--                android:fontFamily="@font/aleo_light"-->
 
             <EditText
                 android:id="@+id/inputCardNumber"
@@ -111,14 +111,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/aleo"
                 android:text="Enter Credit Card Information"
                 android:textColor="@color/white"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+<!--                android:fontFamily="@font/aleo"-->
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="363dp"

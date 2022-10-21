@@ -27,9 +27,8 @@ public class RegisterUser extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Todo Validate user entries before allowing the user to proceed i.e check to make sure the credit card number is valid
-                //Todo save credit card information
-                startActivity(new Intent( RegisterUser.this, LoggedInActivity.class));
+
+                startActivity(new Intent( RegisterUser.this, MainActivity.class));
             }
         });
     }

@@ -47,8 +47,8 @@ public class RegisterChef extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Todo save results for void cheque and description
-                startActivity(new Intent( RegisterChef.this, LoggedInActivity.class));
+
+                startActivity(new Intent( RegisterChef.this, MainActivity.class));
             }
         });
 

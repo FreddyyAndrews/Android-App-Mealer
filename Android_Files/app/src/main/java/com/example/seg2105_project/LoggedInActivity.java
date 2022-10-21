@@ -24,6 +24,6 @@ public class LoggedInActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         System.out.println(currentUser.getEmail());
-        welcomeMsg.setText("Welcome " + currentUser.getEmail());
+        welcomeMsg.setText("Welcome " + currentUser.getEmail() + " you are signed-in as ");
     }
 }

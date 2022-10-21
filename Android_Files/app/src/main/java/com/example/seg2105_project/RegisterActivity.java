@@ -31,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputPassword2, inputAddress, inputCity, inputProvince, inputCountry;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference appDatabaseReference;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +57,24 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegisterChef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Todo Validate user entries before allowing the user to proceed
-                registerNewUser("chef");
-//                startActivity(new Intent( RegisterActivity.this, RegisterChef.class));
+                if(validate()){
+                    type = "chef";
+                    registerNewUser();
+
+                }
+
             }
         });
 
         btnRegisterUser.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Todo Validate user entries before allowing the user to proceed
-                //For example making sure the passwords match and have at least 6 chars
-                //Save user results once you let them through
 
+                if(validate()){
+                    type ="user";
+                    registerNewUser();
 
-
-                startActivity(new Intent( RegisterActivity.this, RegisterUser.class));
+                }
             }
         }));
 
@@ -82,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void registerNewUser(String type) {
+    public void registerNewUser() {
         String inFName = inputFirstName.getText().toString();
         String inLName = inputLastName.getText().toString();
         String inEmail = inputEmail.getText().toString();
@@ -102,6 +106,8 @@ public class RegisterActivity extends AppCompatActivity {
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         if(addUserInfoToDB(user.getUid(), inFName, inLName, inEmail, inAddress, inCity, inProvince, inCountry, type)) {
                             Toast.makeText(RegisterActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
+
+
                         }
                     } else {
                         // If sign in fails, display a message to the user.
@@ -128,5 +134,41 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         return;
+    }
+
+    private boolean validate(){
+
+        String email = inputEmail.getText().toString();
+        String password = inputPassword.getText().toString();
+        String confirmPassword = inputPassword2.getText().toString();
+        String address = inputAddress.getText().toString();
+        String provence = inputProvince.getText().toString();
+        String country = inputCountry.getText().toString();
+        String firstName = inputFirstName.getText().toString();
+        String lastName = inputLastName.getText().toString();
+        String city = inputCity.getText().toString();
+
+        if(!email.matches(emailPattern)){
+            inputEmail.setError("Enter Valid Email Address");
+        }else if(password.isEmpty() || password.length()<6){
+            inputPassword.setError("Input a valid password");
+        }else if(!password.equals(confirmPassword)){
+            inputPassword2.setError("Passwords do not Match");
+        }else if(country.isEmpty() ){
+            inputCountry.setError("Field is Mandatory");
+        }else if(firstName.isEmpty() ){
+            inputFirstName.setError("Field is Mandatory");
+        }else if(address.isEmpty()){
+            inputAddress.setError("Field is Mandatory");
+        }else if(provence.isEmpty()){
+            inputProvince.setError("Field is Mandatory");
+        }else if(city.isEmpty()){
+            inputCity.setError("Field is Mandatory");
+        }else if(lastName.isEmpty()){
+            inputLastName.setError("Field is Mandatory");
+        }else{
+            return true;
+        }
+        return false;
     }
 }

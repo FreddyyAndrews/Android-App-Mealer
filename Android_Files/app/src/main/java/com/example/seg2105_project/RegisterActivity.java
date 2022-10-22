@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     TextView txtHasAccount;
     Button btnRegisterChef, btnRegisterUser;
-    EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputPassword2, inputAddress, inputCity, inputProvince, inputCountry;
+    EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputPassword2, inputAddress;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference appDatabaseReference;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -47,9 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.inputRegisterPassword);
         inputPassword2 = findViewById(R.id.inputRegisterPassword2);
         inputAddress = findViewById(R.id.inputAddress);
-        inputCity = findViewById(R.id.inputCity);
-        inputProvince = findViewById(R.id.inputProvence);
-        inputCountry = findViewById(R.id.inputCountry);
 
         firebaseAuth = FirebaseAuth.getInstance();
         appDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -58,22 +55,16 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validate()){
-                    type = "chef";
-                    registerNewUser();
-
+                    registerNewUser("chef");
                 }
-
             }
         });
 
         btnRegisterUser.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(validate()){
-                    type ="user";
-                    registerNewUser();
-
+                if (validate()) {
+                    registerNewUser("user");
                 }
             }
         }));
@@ -86,16 +77,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void registerNewUser() {
+    public void registerNewUser(String type) {
         String inFName = inputFirstName.getText().toString();
         String inLName = inputLastName.getText().toString();
         String inEmail = inputEmail.getText().toString();
         String inPassword = inputPassword.getText().toString();
         String inAddress = inputAddress.getText().toString();
-        String inCity = inputCity.getText().toString();
-        String inProvince = inputProvince.getText().toString();
-        String inCountry = inputCountry.getText().toString();
-
         firebaseAuth.createUserWithEmailAndPassword(inEmail, inPassword)
             .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -104,24 +91,21 @@ public class RegisterActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if(addUserInfoToDB(user.getUid(), inFName, inLName, inEmail, inAddress, inCity, inProvince, inCountry, type)) {
+                        if(addUserInfoToDB(user.getUid(), inFName, inLName, inEmail, inAddress, type)) {
+                            startActivity(new Intent( RegisterActivity.this, RegisterUser.class));
                             Toast.makeText(RegisterActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
-
-
                         }
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-//                                    updateUI(null);
+                        Toast.makeText(RegisterActivity.this, "Failed to create new user.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
     }
 
-    public boolean addUserInfoToDB(String id, String fName, String lName, String email, String address, String city, String province, String country, String type) {
-        User newUser = new User(fName, lName, email, address, city, country, province, type);
+    public boolean addUserInfoToDB(String id, String fName, String lName, String email, String address, String type) {
+        User newUser = new User(fName, lName, email, address, type);
         try {
             appDatabaseReference.child("users").child(id).setValue(newUser);
             return  true;
@@ -130,45 +114,46 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    // Don't allow user to use the "back" arrow android os feature
-    @Override
-    public void onBackPressed() {
-        return;
-    }
-
     private boolean validate(){
-
+        Boolean isValid = true;
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
         String confirmPassword = inputPassword2.getText().toString();
         String address = inputAddress.getText().toString();
-        String provence = inputProvince.getText().toString();
-        String country = inputCountry.getText().toString();
         String firstName = inputFirstName.getText().toString();
         String lastName = inputLastName.getText().toString();
-        String city = inputCity.getText().toString();
 
         if(!email.matches(emailPattern)){
             inputEmail.setError("Enter Valid Email Address");
-        }else if(password.isEmpty() || password.length()<6){
-            inputPassword.setError("Input a valid password");
-        }else if(!password.equals(confirmPassword)){
-            inputPassword2.setError("Passwords do not Match");
-        }else if(country.isEmpty() ){
-            inputCountry.setError("Field is Mandatory");
-        }else if(firstName.isEmpty() ){
-            inputFirstName.setError("Field is Mandatory");
-        }else if(address.isEmpty()){
-            inputAddress.setError("Field is Mandatory");
-        }else if(provence.isEmpty()){
-            inputProvince.setError("Field is Mandatory");
-        }else if(city.isEmpty()){
-            inputCity.setError("Field is Mandatory");
-        }else if(lastName.isEmpty()){
-            inputLastName.setError("Field is Mandatory");
-        }else{
-            return true;
+            isValid = false;
         }
-        return false;
+        if(password.isEmpty() || password.length() < 6){
+            inputPassword.setError("Input a valid password");
+            isValid = false;
+        }
+        if(!password.equals(confirmPassword)){
+            inputPassword2.setError("Passwords do not Match");
+            isValid = false;
+        }
+        if(firstName.isEmpty() ){
+            inputFirstName.setError("Field is Mandatory");
+            isValid = false;
+        }
+        if(address.isEmpty()){
+            inputAddress.setError("Field is Mandatory");
+            isValid = false;
+        }
+        if(lastName.isEmpty()){
+            inputLastName.setError("Field is Mandatory");
+            isValid = false;
+        }
+        return isValid;
+    }
+
+
+    // Don't allow user to use the "back" arrow android os feature
+    @Override
+    public void onBackPressed() {
+        return;
     }
 }

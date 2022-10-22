@@ -44,10 +44,10 @@ public class LoggedInActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String type = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String address = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String email = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String firstName = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String lastName = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
+                String address = snapshot.child(currentUser.getUid()).child("addresss").getValue(String.class);
+                String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
+                String firstName = snapshot.child(currentUser.getUid()).child("firstName").getValue(String.class);
+                String lastName = snapshot.child(currentUser.getUid()).child("lastName").getValue(String.class);
 
                 welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
             }

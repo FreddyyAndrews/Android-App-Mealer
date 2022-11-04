@@ -16,3 +16,5 @@ Project Log for Team 26 in the SEG2105 Project:
 
 2022-10-21 Matt completed UML diagrams
 
+2022-11-03 Frederick Completed UI for admin features
+

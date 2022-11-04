@@ -13,10 +13,23 @@
         android:theme="@style/Theme.SEG2105_Project"
         tools:targetApi="31">
         <activity
+            android:name=".HandleComplaint"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".LoggedInActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            >
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

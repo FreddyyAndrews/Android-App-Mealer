@@ -2,6 +2,7 @@ package com.example.seg2105_project;
 public class User extends Object {
     public String firstName, lastName, email, address, type;
 
+
     public User() {}
 
     public User (String firstName, String lastName, String email, String address, String type) {
@@ -9,6 +10,11 @@ public class User extends Object {
         this.lastName = lastName;
         this.email = email;
         this.address = address;
+        this.type = type;
+
+    }
+
+    public void setType(String type){
         this.type = type;
     }
 }

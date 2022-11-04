@@ -3,13 +3,10 @@ package com.example.seg2105_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.icu.text.SymbolTable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,8 +14,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
 
 public class LoggedInActivity extends AppCompatActivity {
 
@@ -30,6 +25,7 @@ public class LoggedInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in);
         welcomeMsg = findViewById(R.id.welcomeText);
@@ -50,6 +46,10 @@ public class LoggedInActivity extends AppCompatActivity {
                 String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
 
                 welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
+
+
+                startActivity(new Intent( LoggedInActivity.this, AdminActivity.class));
+
             }
 
             @Override

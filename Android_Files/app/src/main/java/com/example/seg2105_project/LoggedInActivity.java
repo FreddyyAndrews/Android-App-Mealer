@@ -47,9 +47,7 @@ public class LoggedInActivity extends AppCompatActivity {
 
                 welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
 
-
                 startActivity(new Intent( LoggedInActivity.this, AdminActivity.class));
-
             }
 
             @Override

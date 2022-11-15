@@ -37,7 +37,7 @@ public class HandleComplaint extends AppCompatActivity {
         btnSuspend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateSuspension()){
+                if (validateSuspension()){
                     startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                 }
 
@@ -47,20 +47,22 @@ public class HandleComplaint extends AppCompatActivity {
 
     private boolean validateSuspension(){
         Boolean isValid = true;
-        String susLength = txtLengthOfSuspension.getText().toString();
-        if(susLength.isEmpty()){
-            isValid=false;
+        String suspentionLength = txtLengthOfSuspension.getText().toString();
+        double nbSuspentionLength = Double.parseDouble(suspentionLength);
+
+        if (suspentionLength.isEmpty()) {
+            isValid = false;
             txtLengthOfSuspension.setError("Field is Mandatory");
         }
-        try{
-            int tester = Integer.parseInt(susLength);
-            if(tester<1){
-                isValid=false;
-                txtLengthOfSuspension.setError("Enter positive number");
-            }
-        }catch(NumberFormatException e){
-            isValid=false;
-            txtLengthOfSuspension.setError("Enter valid number");
+
+        if (nbSuspentionLength < 1) {
+            isValid = false;
+            txtLengthOfSuspension.setError("Enter positive number");
+        }
+
+        if (nbSuspentionLength > 365) {
+            isValid = false;
+            txtLengthOfSuspension.setError("You can't suspend a chef for more than a year. Ban if need be.");
         }
 
         return isValid;

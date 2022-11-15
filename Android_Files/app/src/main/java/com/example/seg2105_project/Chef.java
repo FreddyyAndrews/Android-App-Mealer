@@ -2,7 +2,7 @@ package com.example.seg2105_project;
 
 public class Chef extends User{
     private int suspensionLength; // If user is not suspended SuspensionLength is 0
-    private boolean banned;
+    private boolean isBanned;
     private String description;
     // TODO: We'll need a VoidCheque data type
     private int numMealsSold;
@@ -16,7 +16,7 @@ public class Chef extends User{
         this.address = address;
         this.type = type;
         this.suspensionLength = 0;
-        this.banned = false;
+        this.isBanned = false;
         this.description = description;
         this.numMealsSold = 0;
         this.rating = 5.0;
@@ -28,7 +28,7 @@ public class Chef extends User{
         return this.suspensionLength;
     }
     public boolean getBanned(){
-        return this.banned;
+        return this.isBanned;
     }
     public String getDescription(){
         return this.description;
@@ -55,6 +55,6 @@ public class Chef extends User{
         this.suspensionLength = suspensionLength;
     }
     public void setBanned(boolean banned){
-        this.banned = banned;
+        this.isBanned = banned;
     }
 }

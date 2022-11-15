@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Validate the Login Before allowing the user to proceed
                 String inEmail = inputEmail.getText().toString();
                 String inPassword = inputPassword.getText().toString();
 
@@ -62,9 +61,13 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "signInWithEmail:success");
-                                FirebaseUser user = firebaseAuth.getCurrentUser();
                                 Toast.makeText(MainActivity.this, "Log in success!.",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent( MainActivity.this, LoggedInActivity.class));
+                                System.out.println(inEmail);
+                                if (inEmail.equals("admin@gmail.com")) {
+                                    startActivity(new Intent( MainActivity.this, AdminActivity.class));
+                                } else {
+                                    startActivity(new Intent( MainActivity.this, LoggedInActivity.class));
+                                }
                             } else {
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(MainActivity.this, "Incorrect email or password.", Toast.LENGTH_SHORT).show();

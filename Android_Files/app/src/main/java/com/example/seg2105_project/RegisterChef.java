@@ -47,8 +47,7 @@ public class RegisterChef extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent( RegisterChef.this, MainActivity.class));
+                startActivity(new Intent( RegisterChef.this, LoggedInActivity.class));
             }
         });
 
@@ -93,5 +92,11 @@ public class RegisterChef extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    // Don't allow user to use the "back" arrow android os feature
+    @Override
+    public void onBackPressed() {
+        return;
     }
 }

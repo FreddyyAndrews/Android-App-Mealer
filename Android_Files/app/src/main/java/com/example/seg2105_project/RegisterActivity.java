@@ -92,7 +92,11 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         if(addUserInfoToDB(user.getUid(), inFName, inLName, inEmail, inAddress, type)) {
-                            startActivity(new Intent( RegisterActivity.this, RegisterUser.class));
+                            if (type == "chef")  {
+                                startActivity(new Intent( RegisterActivity.this, RegisterChef.class));
+                            } else {
+                                startActivity(new Intent( RegisterActivity.this, RegisterUser.class));
+                            }
                             Toast.makeText(RegisterActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
                         }
                     } else {
@@ -105,9 +109,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean addUserInfoToDB(String id, String fName, String lName, String email, String address, String type) {
-        User newUser = new User(fName, lName, email, address, type);
+        User newPerson = type == "chef" ? new Chef(fName, lName, email, address, type) : new User(fName, lName, email, address, type);
         try {
-            appDatabaseReference.child("users").child(id).setValue(newUser);
+            appDatabaseReference.child("people").child(id).setValue(newPerson);
+            appDatabaseReference.child("people").child(id).setValue(newPerson);
             return  true;
         } catch (Exception e) {
             return false;
@@ -123,27 +128,27 @@ public class RegisterActivity extends AppCompatActivity {
         String firstName = inputFirstName.getText().toString();
         String lastName = inputLastName.getText().toString();
 
-        if(!email.matches(emailPattern)){
+        if(!email.matches(emailPattern)) {
             inputEmail.setError("Enter Valid Email Address");
             isValid = false;
         }
-        if(password.isEmpty() || password.length() < 6){
+        if(password.isEmpty() || password.length() < 6) {
             inputPassword.setError("Input a valid password");
             isValid = false;
         }
-        if(!password.equals(confirmPassword)){
+        if(!password.equals(confirmPassword)) {
             inputPassword2.setError("Passwords do not Match");
             isValid = false;
         }
-        if(firstName.isEmpty() ){
+        if(firstName.isEmpty()) {
             inputFirstName.setError("Field is Mandatory");
             isValid = false;
         }
-        if(address.isEmpty()){
+        if(address.isEmpty()) {
             inputAddress.setError("Field is Mandatory");
             isValid = false;
         }
-        if(lastName.isEmpty()){
+        if(lastName.isEmpty()) {
             inputLastName.setError("Field is Mandatory");
             isValid = false;
         }

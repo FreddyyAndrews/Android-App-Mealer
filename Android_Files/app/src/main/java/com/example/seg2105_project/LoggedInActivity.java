@@ -17,20 +17,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoggedInActivity extends AppCompatActivity {
 
-    //Todo give wlecome message as stated in deliverable instructions
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
     private DatabaseReference appDatabaseReference;
     TextView welcomeMsg;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        String activity = intent.getStringExtra("activity");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in);
         welcomeMsg = findViewById(R.id.welcomeText);
 
-        appDatabaseReference = FirebaseDatabase.getInstance().getReference("users");
+
+        appDatabaseReference = FirebaseDatabase.getInstance().getReference("people");
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -46,10 +47,6 @@ public class LoggedInActivity extends AppCompatActivity {
                 String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
 
                 welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
-
-
-                startActivity(new Intent( LoggedInActivity.this, AdminActivity.class));
-
             }
 
             @Override

@@ -11,7 +11,6 @@ public class User extends Object {
         this.email = email;
         this.address = address;
         this.type = type;
-
     }
 
     public void setType(String type){

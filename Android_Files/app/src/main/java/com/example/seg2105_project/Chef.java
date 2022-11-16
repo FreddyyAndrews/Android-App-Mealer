@@ -8,8 +8,9 @@ public class Chef extends User{
     private int numMealsSold;
     private double rating;
     private int numRatings;
+    private Meal[] menu;
 
-    public Chef(String firstName, String lastName, String email, String address, String type, String description){
+    public Chef(String firstName, String lastName, String email, String address, String type){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -17,11 +18,17 @@ public class Chef extends User{
         this.type = type;
         this.suspensionLength = 0;
         this.isBanned = false;
-        this.description = description;
+        this.description = null;
         this.numMealsSold = 0;
         this.rating = 5.0;
         this.numRatings = 0;
+        this.menu = null;
     }
+
+    // TODO: We'll need a page for the Chef to
+    //  1. Enter their description
+    //  2. Submit their void cheque / direct deposit details
+    //  3. add meals to their menu
 
     // Getters for Chef-specific Attributes
     public int getSuspensionLength(){

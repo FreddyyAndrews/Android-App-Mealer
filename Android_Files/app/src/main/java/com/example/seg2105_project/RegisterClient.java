@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class RegisterUser extends AppCompatActivity {
+public class RegisterClient extends AppCompatActivity {
     Button btnBack;
     Button btnRegister;
     @Override
@@ -20,14 +20,14 @@ public class RegisterUser extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( RegisterUser.this, RegisterActivity.class));
+                startActivity(new Intent( RegisterClient.this, RegisterActivity.class));
             }
         });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent( RegisterUser.this, LoggedInActivity.class));
+                startActivity(new Intent( RegisterClient.this, LoggedInActivity.class));
             }
         });
     }

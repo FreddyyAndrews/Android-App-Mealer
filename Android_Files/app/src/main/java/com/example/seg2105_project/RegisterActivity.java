@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (type == "chef")  {
                                 startActivity(new Intent( RegisterActivity.this, RegisterChef.class));
                             } else {
-                                startActivity(new Intent( RegisterActivity.this, RegisterUser.class));
+                                startActivity(new Intent( RegisterActivity.this, RegisterClient.class));
                             }
                             Toast.makeText(RegisterActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
                         }
@@ -108,8 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
             });
     }
 
-    public boolean addUserInfoToDB(String id, String fName, String lName, String email, String address, String type) {
-        User newPerson = type == "chef" ? new Chef(fName, lName, email, address, type) : new User(fName, lName, email, address, type);
+    public boolean addUserInfoToDB(String id, String firstName, String lastName, String email, String address, String type) {
+        User newPerson = type == "chef" ? new Chef(firstName, lastName, email, address, type) : new Client(firstName, lastName, email, address, type);
         try {
             appDatabaseReference.child("people").child(id).setValue(newPerson);
             appDatabaseReference.child("people").child(id).setValue(newPerson);

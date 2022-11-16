@@ -1,8 +1,10 @@
 package com.example.seg2105_project;
 public class User extends Object {
-    public String firstName, lastName, email, address, type;
 
+    //Instance Variables
+    protected String firstName, lastName, email, address, type;
 
+    //Constructors
     public User() {}
 
     public User (String firstName, String lastName, String email, String address, String type) {
@@ -11,9 +13,17 @@ public class User extends Object {
         this.email = email;
         this.address = address;
         this.type = type;
+
     }
 
+    //Getters and Setters
     public void setType(String type){
         this.type = type;
     }
+    public String getFirstName() {return firstName;}
+    public String getLastName() {return lastName;}
+    public String getEmail() {return email;}
+    public String getAddress() {return address;}
+    public String getType() {return type;}
+
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/chef_bg"
+
     tools:context=".RegisterClient">
 
 
@@ -12,7 +13,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#9A000000" />
+        android:background="#9A000000"
+        android:windowSoftInputMode="stateVisible|adjustPan" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +40,7 @@
                 app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-<!--                android:fontFamily="@font/aleo_light"-->
+            <!--                android:fontFamily="@font/aleo_light"-->
 
             <EditText
                 android:id="@+id/inputCardNumber"
@@ -117,7 +119,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
-<!--                android:fontFamily="@font/aleo"-->
+            <!--                android:fontFamily="@font/aleo"-->
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="363dp"

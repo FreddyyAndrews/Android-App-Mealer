@@ -8,10 +8,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import android.widget.Toast;
 
 
 public class RegisterChef extends AppCompatActivity {
@@ -19,13 +25,18 @@ public class RegisterChef extends AppCompatActivity {
     Button btnBack;
     Button btnVoidCheque;
     Button btnRegister;
+    EditText edtTxtDescribe;
     int SELECT_PICTURE = 200;
     private  Drawable voidCheque;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference appDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_chef);
         btnBack = findViewById(R.id.btnBack);
+        edtTxtDescribe = findViewById(R.id.edtTxtDescribe);
         btnVoidCheque = findViewById(R.id.btnVoidCheque);
         btnRegister= findViewById(R.id.btnRegister);
 
@@ -47,9 +58,17 @@ public class RegisterChef extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO add void cheque and description to db
+                String description = edtTxtDescribe.getText().toString();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
                 startActivity(new Intent( RegisterChef.this, LoggedInActivity.class));
             }
         });
+
+    }
+
+    public void addChefSpecificInfoToDB(String description, Drawable voidCheque) {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
     }
 

@@ -45,7 +45,10 @@ public class LoggedInActivity extends AppCompatActivity {
                 String lastName = snapshot.child(currentUser.getUid()).child("lastName").getValue(String.class);
                 String address = snapshot.child(currentUser.getUid()).child("addresss").getValue(String.class);
                 String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
-
+                //Sends Chef to Chef activity
+                if(type.equals("chef")){
+                    startActivity(new Intent( LoggedInActivity.this, ChefActivity.class));
+                }
                 welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
             }
 

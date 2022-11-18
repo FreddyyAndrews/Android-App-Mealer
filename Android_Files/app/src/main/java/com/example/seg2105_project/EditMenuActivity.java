@@ -22,7 +22,7 @@ public class EditMenuActivity extends AppCompatActivity {
         btnAddMenuItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO implement Adding Menu Items
+                startActivity(new Intent( EditMenuActivity.this, AddMenuActivity.class));
             }
         });
 

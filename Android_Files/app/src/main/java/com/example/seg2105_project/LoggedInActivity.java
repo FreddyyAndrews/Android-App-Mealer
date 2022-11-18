@@ -47,7 +47,12 @@ public class LoggedInActivity extends AppCompatActivity {
                 String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
                 //Sends Chef to Chef activity
                 if(type.equals("chef")){
-                    startActivity(new Intent( LoggedInActivity.this, ChefActivity.class));
+                    if(snapshot.child(currentUser.getUid()).child("suspensionLength").getValue(Integer.class).equals(0) && !snapshot.child(currentUser.getUid()).child("banned").getValue(Boolean.class)){
+                        startActivity(new Intent( LoggedInActivity.this, ChefActivity.class));
+                    }else{
+                        startActivity(new Intent( LoggedInActivity.this, ChefBannedOrSuspended.class));
+                    }
+
                 }
                 welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
             }

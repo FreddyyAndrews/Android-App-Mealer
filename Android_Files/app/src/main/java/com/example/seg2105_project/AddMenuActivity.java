@@ -51,7 +51,7 @@ public class AddMenuActivity extends AppCompatActivity {
                 if(validate()){
                     try{
                         //TODO add meal to db
-                        
+
                     }catch(Exception e){
                         //TODO give error message
                     }

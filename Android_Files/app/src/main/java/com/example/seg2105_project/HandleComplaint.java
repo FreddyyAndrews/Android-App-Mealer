@@ -11,6 +11,7 @@ import android.widget.EditText;
 public class HandleComplaint extends AppCompatActivity {
     Button btnBan, btnDismiss, btnSuspend;
     EditText txtLengthOfSuspension;
+    Complaint complaint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,8 @@ public class HandleComplaint extends AppCompatActivity {
         btnBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Chef bannedChef = complaint.getAssociatedChef();
+                bannedChef.setBanned(true);
                 startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
             }
         });

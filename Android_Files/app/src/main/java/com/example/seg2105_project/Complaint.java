@@ -3,16 +3,20 @@ package com.example.seg2105_project;
 public class Complaint {
 
     private String complaintMessage;
-    private User associatedChef;
+    private Chef associatedChef;
 
-    public Complaint(String complaintMessage, User associatedChef ){
+    public Complaint(String complaintMessage, Chef associatedChef ){
 
         this.complaintMessage = complaintMessage;
         this.associatedChef = associatedChef;
 
     }
 
-    public User getAssociatedChef(){
+    public Complaint(){
+
+    }
+
+    public Chef getAssociatedChef(){
         return associatedChef;
     }
 

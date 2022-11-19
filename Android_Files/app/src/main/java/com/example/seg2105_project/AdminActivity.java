@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Stack;
 
 
 public class AdminActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class AdminActivity extends AppCompatActivity {
 
     ListView viewComplaints;
     Button btnHandleComplaint, btnLogout;
-    ArrayList<Complaint> complaintList = new ArrayList<>();
+    Stack<Complaint> complaintList = new Stack<Complaint>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,6 @@ public class AdminActivity extends AppCompatActivity {
         btnHandleComplaint = (Button) findViewById(R.id.btnHandleComplaint);
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
-//        appDatabaseReference = FirebaseDatabase.getInstance().getReference().child("complaints");
         appDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -66,37 +66,19 @@ public class AdminActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
                         Complaint complaint = complaintSnapshot.getValue(Complaint.class);
-                        System.out.println(complaint);
+                        complaintList.push(complaint);
                     }
-
-//                    for (int i = 1; i <= allComplaints.size(); i++) {
-//                        complaintListDisplay.add(allComplaints.get(i).)
-//                    }
-
+                    ArrayList complaintListDisplay = new ArrayList();
+                    for (int i = 0; i < complaintList.size(); i++) {
+                        complaintListDisplay.add(complaintList.get(i).getAssociatedChef().email);
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(AdminActivity.this, R.layout.row, complaintListDisplay);
+                    viewComplaints.setAdapter(arrayAdapter);
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     //handle databaseError
                 }
             });
-
-//        User complaintChef = new User("bob", "John", "spitter@gmail.com", "5 Bob street", "chef");
-//        Complaint testComplaint = new Complaint("Spat in my food", complaintChef);
-//        complaintList.add(testComplaint);
-//        complaintListDisplay.add(complaintChef.email);
-//
-//        complaintList.add(testComplaint);
-//        complaintListDisplay.add(complaintChef.email);
-//
-//        complaintList.add(testComplaint);
-//        complaintListDisplay.add(complaintChef.email);
-//
-//        complaintList.add(testComplaint);
-//        complaintListDisplay.add(complaintChef.email);
-
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.row, complaintListDisplay);
-//        viewComplaints.setAdapter(arrayAdapter);
-
     }
 }

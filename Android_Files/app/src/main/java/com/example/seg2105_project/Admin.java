@@ -6,6 +6,9 @@ public class Admin extends User {
     //Instance Variables
     ArrayList<Complaint> inbox= new ArrayList<Complaint>();
     //Constructor
+
+    public Admin() {}
+
     public Admin(String firstName, String lastName, String email, String address, String type, ArrayList<Complaint> inbox ){
         this.firstName = firstName;
         this.lastName = lastName;

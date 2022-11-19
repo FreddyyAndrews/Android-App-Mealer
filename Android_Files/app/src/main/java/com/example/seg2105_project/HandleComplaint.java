@@ -5,13 +5,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Stack;
 
 public class HandleComplaint extends AppCompatActivity {
     Button btnBan, btnDismiss, btnSuspend;
     EditText txtLengthOfSuspension;
     Complaint complaint;
+    TextView txtChefName;
+    TextView txtChefEmail;
+    TextView txtDescription;
+    private DatabaseReference appDatabaseReference;
+    Stack<Complaint> complaintList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,32 +39,53 @@ public class HandleComplaint extends AppCompatActivity {
         btnSuspend = (Button) findViewById(R.id.btnSuspend);
         btnDismiss = (Button) findViewById(R.id.btnDismiss);
         txtLengthOfSuspension = (EditText) findViewById(R.id.txtLengthOfSuspension);
+        complaintList = new Stack<Complaint>();
 
-        btnBan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Chef bannedChef = complaint.getAssociatedChef();
-                bannedChef.setBanned(true);
-                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
-            }
-        });
+        appDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        appDatabaseReference.child("complaints").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
+                            Complaint complaint = complaintSnapshot.getValue(Complaint.class);
+                            complaintList.push(complaint);
+                        }
+                        Complaint currentComplaint = complaintList.peek();
+                        populateFields(currentComplaint);
 
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
-            }
-        });
+                        btnBan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Chef bannedChef = complaint.getAssociatedChef();
+                                bannedChef.setBanned(true);
+                                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+                            }
+                        });
 
-        btnSuspend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateSuspension()){
-                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
-                }
+                        btnDismiss.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+                            }
+                        });
 
-            }
-        });
+                        btnSuspend.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (validateSuspension()){
+                                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+                                }
+
+                            }
+                        });
+
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
     }
 
     private boolean validateSuspension(){
@@ -69,5 +109,15 @@ public class HandleComplaint extends AppCompatActivity {
         }
 
         return isValid;
+    }
+
+    private void populateFields(Complaint complaint) {
+        txtChefName = (TextView) findViewById(R.id.txtChefName);
+        txtChefEmail = (TextView) findViewById(R.id.txtChefEmail);
+        txtDescription = (TextView) findViewById(R.id.txtDescription);
+
+        txtChefName.setText("Chef Name: " + complaint.getAssociatedChef().firstName + " " + complaint.getAssociatedChef().lastName);
+        txtChefEmail.setText("Chef Email: " + complaint.getAssociatedChef().email);
+        txtDescription.setText(complaint.getComplaintMessage());
     }
 }

@@ -1,7 +1,8 @@
 package com.example.seg2105_project;
 
-public class Chef extends User{
+public class Chef extends User {
     private int suspensionLength; // If user is not suspended SuspensionLength is 0
+    private String bandEndDate;
     private boolean isBanned;
     private String description;
     // TODO: We'll need a VoidCheque data type
@@ -10,19 +11,18 @@ public class Chef extends User{
     private int numRatings;
     private Meal[] menu;
 
-    public Chef(String firstName, String lastName, String email, String address, String type){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
-        this.type = type;
+    public Chef() {}
+
+    public Chef(String firstName, String lastName, String email, String address, String type, String id){
+        super(firstName, lastName, email, address, type, id);
         this.suspensionLength = 0;
         this.isBanned = false;
-        this.description = null;
+        this.description = "";
         this.numMealsSold = 0;
         this.rating = 5.0;
         this.numRatings = 0;
         this.menu = null;
+        this.bandEndDate = "";
     }
 
     // TODO: We'll need a page for the Chef to
@@ -46,6 +46,7 @@ public class Chef extends User{
     public double getRating(){
         return this.rating;
     }
+    public String getId() { return this.id; }
 
     // Setting Chef-specific Attributes
     public void setRating(double rating){
@@ -58,10 +59,6 @@ public class Chef extends User{
     public void setDescription(String description){
         this.description = description;
     }
-    public void setSuspensionLength(int suspensionLength){
-        this.suspensionLength = suspensionLength;
-    }
-    public void setBanned(boolean banned){
-        this.isBanned = banned;
-    }
+    public void setSuspensionLength(int suspensionLength){ this.suspensionLength = suspensionLength; }
+    public void setBanned(boolean banned){ this.isBanned = banned; }
 }

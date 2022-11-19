@@ -6,10 +6,8 @@ public class Complaint {
     private Chef associatedChef;
 
     public Complaint(String complaintMessage, Chef associatedChef ){
-
         this.complaintMessage = complaintMessage;
         this.associatedChef = associatedChef;
-
     }
 
     public Complaint(){

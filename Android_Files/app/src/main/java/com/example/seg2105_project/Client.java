@@ -1,14 +1,10 @@
 package com.example.seg2105_project;
 
-public class Client extends User{
+public class Client extends User {
     private CreditCard creditCard;
 
-    public Client(String firstName, String lastName, String email, String address, String type){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
-        this.type = type;
+    public Client(String firstName, String lastName, String email, String address, String type, String id){
+        super(firstName, lastName, email, address, type, id);
         this.creditCard = null;
     }
 

@@ -86,7 +86,7 @@ public class AddMenuActivity extends AppCompatActivity {
             returnVal = false;
         }
         if(mealType.equals("")){
-            inputCuisineType.setError("Field is Mandatory");
+            inputMealType.setError("Field is Mandatory");
             returnVal = false;
         }
         if(price.equals("")){

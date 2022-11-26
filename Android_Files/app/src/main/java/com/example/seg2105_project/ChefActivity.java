@@ -14,6 +14,8 @@ public class ChefActivity extends AppCompatActivity {
     Button btnEditMenu;
     Button btnEditMealList;
     Button btnSignOut;
+    Button btnHandleMealRequest;
+    Button btnViewOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,8 @@ public class ChefActivity extends AppCompatActivity {
         btnEditMealList = findViewById(R.id.btnEditMealList);
         btnEditMenu = findViewById(R.id.btnEditMenu);
         btnSignOut = findViewById(R.id.btnSignOut);
+        btnHandleMealRequest = findViewById(R.id.btnHandleMealRequest);
+        btnViewOrders = findViewById(R.id.btnViewOrders);
 
         btnEditMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +46,21 @@ public class ChefActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent( ChefActivity.this, EditMealListActivity.class));
+            }
+        });
+
+        btnHandleMealRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Sends user to handle meal request activity
+                startActivity(new Intent( ChefActivity.this, HandleMealRequest.class));
+            }
+        });
+
+        btnViewOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent( ChefActivity.this, ViewCurrentOrders.class));
             }
         });
 

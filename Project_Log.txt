@@ -20,3 +20,23 @@ Project Log for Team 26 in the SEG2105 Project:
 
 2022-11-04 Matt updated UML diagram according to deliverable 2 specifications
 
+2022-11-15 Justin improved code clairity and worked on adding complaints to list
+
+2022-11-15 Matt improved chef class and improved UML diagrams
+
+2022-11-16 Matt refactored user classes to improve code.
+
+2022-11-16 Frederick Added specific class for admin.
+
+2022-11-17 Frederick Added the ability to save chef description and credit card info to the database.
+
+2022-11-18 Frederick completed UI for deliverable 3
+
+2022-11-18 Matt finished UML diagrams for deliverable 3
+
+2022-11-18 Justin implemented compalint system in the database.
+
+2022-11-26 Frederick Completed UI for chef.
+
+
+

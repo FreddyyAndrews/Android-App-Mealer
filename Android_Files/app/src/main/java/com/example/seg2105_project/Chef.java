@@ -61,4 +61,5 @@ public class Chef extends User {
     }
     public void setSuspensionLength(int suspensionLength){ this.suspensionLength = suspensionLength; }
     public void setBanned(boolean banned){ this.isBanned = banned; }
+
 }

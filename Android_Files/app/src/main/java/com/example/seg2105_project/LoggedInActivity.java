@@ -53,8 +53,11 @@ public class LoggedInActivity extends AppCompatActivity {
                         startActivity(new Intent( LoggedInActivity.this, ChefBannedOrSuspended.class));
                     }
 
+                }else if(type.equals("client")){
+                    startActivity(new Intent( LoggedInActivity.this, ClientActivity.class));
                 }
-                welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
+                //welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
+                welcomeMsg.setText("Loading...");
             }
 
             @Override

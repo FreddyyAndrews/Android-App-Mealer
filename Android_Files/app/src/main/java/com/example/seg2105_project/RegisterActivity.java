@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validate()) {
-                    registerNewUser("user");
+                    registerNewUser("client");
                 }
             }
         }));

@@ -73,6 +73,8 @@ public class HandleComplaint extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 if (validateSuspension()){
+                                    Chef suspendedChef = complaint.getAssociatedChef();
+                                    suspendedChef.setSuspensionLength(Integer.parseInt(txtLengthOfSuspension.getText().toString()));
                                     startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                                 }
 

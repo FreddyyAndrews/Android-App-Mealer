@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".RegisterActivity"
     android:windowSoftInputMode="stateVisible|adjustPan"
-    android:background="@drawable/admin_bg_good"
-    >
+    android:background="@drawable/chef_bg">
 
     <View
 
-        android:id="@+id/view"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00000000" />
+        android:layout_width="match_parent"
+        android:background= "#8A000000"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,30 +29,30 @@
 
 
             <ListView
-                android:id="@+id/viewComplaints"
+                android:id="@+id/viewRequests"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="100dp"
-                android:layout_marginEnd="25dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
-                android:background="#57000000"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="100dp"
+                android:background="#4D000000"
                 android:cacheColorHint="@color/white"
                 android:textColor="@color/white"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnHandleComplaint"
+                app:layout_constraintTop_toBottomOf="@+id/textInstructions2"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtDisplayMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Welcome Admin"
+                android:layout_marginTop="16dp"
+                android:text="View Pending Orders"
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Listed below are Complaints"
+                android:text="Listed below are your orders"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="The email of the associated chef is displayed"
+                android:text="You will be Notified when your food is ready"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -86,39 +84,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInstructions" />
 
             <Button
-                android:id="@+id/btnLogout"
+                android:id="@+id/btnReturnToConsole"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/input_bg"
-                android:text="Logout"
+                android:text="Return to Console"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewComplaints"
-                app:layout_constraintVertical_bias="0.134" />
-
-            <Button
-                android:id="@+id/btnHandleComplaint"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/input_bg"
-                android:text="Handle Next Complaint"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInstructions2" />
+                app:layout_constraintTop_toBottomOf="@+id/viewRequests"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

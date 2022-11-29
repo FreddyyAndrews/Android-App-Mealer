@@ -8,20 +8,13 @@
     android:windowSoftInputMode="stateVisible|adjustPan"
     android:background= "@drawable/chef_bg">
 
-    <View
-
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#9A000000" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
@@ -36,36 +29,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Welcome Chef"
+                android:text="Welcome Client"
                 android:textColor="@color/white"
                 android:textSize="44sp"
+                android:translationZ="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btnEditMenu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/input_bg"
-                android:fontFamily="sans-serif"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:text="Edit Menu"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
-                app:layout_constraintTop_toBottomOf="@+id/btnViewOrders"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Button
-                android:id="@+id/btnHandleMealRequest"
+                android:id="@+id/btnOrder"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -75,9 +48,10 @@
                 android:paddingTop="13dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="13dp"
-                android:text="View Meal Requests"
+                android:text="Order now"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:translationZ="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -86,73 +60,10 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/btnSettings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/input_bg"
-                android:fontFamily="sans-serif"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:text="Settings"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
-                app:layout_constraintTop_toBottomOf="@+id/btnHandleMealRequest"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Button
-                android:id="@+id/btnViewOrders"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/input_bg"
-                android:fontFamily="sans-serif"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:text="View Current Orders"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
-                app:layout_constraintTop_toBottomOf="@+id/btnSettings"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Button
-                android:id="@+id/btnEditMealList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/input_bg"
-                android:fontFamily="sans-serif"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:text="Edit Meal List"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
-                app:layout_constraintTop_toBottomOf="@+id/btnEditMenu"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Button
                 android:id="@+id/btnSignOut"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/input_bg"
                 android:fontFamily="sans-serif"
                 android:paddingLeft="20dp"
@@ -162,24 +73,91 @@
                 android:text="Sign-Out"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:translationZ="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
+                app:layout_constraintTop_toBottomOf="@+id/btnViewPendingOrders"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/btnViewPendingOrders"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:text="View pending orders"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:translationZ="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
-                app:layout_constraintTop_toBottomOf="@+id/btnEditMealList"
+                app:layout_constraintTop_toBottomOf="@+id/btnMakeAComplaint"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/txtRating"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnMakeAComplaint"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:text="Make a Complaint"
+                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:text=" Your Current Rating:"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtDisplayMessage" />
+                android:translationZ="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
+                app:layout_constraintTop_toBottomOf="@+id/btnChangePaymentInfo"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/btnChangePaymentInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/input_bg"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:text="Change Payment Info"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:translationZ="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
+                app:layout_constraintTop_toBottomOf="@+id/btnOrder"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <View
+
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#9A000000"
+                android:translationZ="0dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

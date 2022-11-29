@@ -38,5 +38,7 @@ Project Log for Team 26 in the SEG2105 Project:
 
 2022-11-26 Frederick Completed UI for chef.
 
+2022-11-26 Frederick Added features for chef and completed most of UI for user.
+
 
 

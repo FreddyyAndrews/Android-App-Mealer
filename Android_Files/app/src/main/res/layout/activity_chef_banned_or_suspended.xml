@@ -32,7 +32,7 @@
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txtDisplayMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
@@ -54,7 +54,7 @@
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDisplayMessage" />
 
             <Button
                 android:id="@+id/btnSignOut"
@@ -70,10 +70,10 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="@+id/txtDisplayMessage"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/txtDisplayMessage"
+                app:layout_constraintTop_toBottomOf="@+id/txtDisplayMessage"
                 app:layout_constraintVertical_bias="0.858" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

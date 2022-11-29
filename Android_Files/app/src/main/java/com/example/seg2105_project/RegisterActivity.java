@@ -111,7 +111,6 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean addUserInfoToDB(String id, String firstName, String lastName, String email, String address, String type) {
         User newPerson = type == "chef" ? new Chef(firstName, lastName, email, address, type, id) : new Client(firstName, lastName, email, address, type, id);
         try {
-            System.out.println(newPerson.id);
             appDatabaseReference.child("people").child(id).setValue(newPerson);
             return  true;
         } catch (Exception e) {

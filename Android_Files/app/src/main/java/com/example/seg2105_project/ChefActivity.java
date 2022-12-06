@@ -54,12 +54,10 @@ public class ChefActivity extends AppCompatActivity {
         appDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String type = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String firstName = snapshot.child(currentUser.getUid()).child("firstName").getValue(String.class);
-                String lastName = snapshot.child(currentUser.getUid()).child("lastName").getValue(String.class);
-                String address = snapshot.child(currentUser.getUid()).child("addresss").getValue(String.class);
-                String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
-                int rating = snapshot.child(currentUser.getUid()).child("rating").getValue(Integer.class);
+                String dbIdEmail = currentUser.getEmail().replace('.', '~');
+
+                String firstName = snapshot.child(dbIdEmail).child("firstName").getValue(String.class);
+                int rating = snapshot.child(dbIdEmail).child("rating").getValue(Integer.class);
 
                 //welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
                 txtDisplayMessage.setText("Welcome "+ firstName);

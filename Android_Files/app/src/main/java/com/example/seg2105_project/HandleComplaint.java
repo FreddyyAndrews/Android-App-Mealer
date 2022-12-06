@@ -18,8 +18,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Stack;
 
 public class HandleComplaint extends AppCompatActivity {
@@ -73,9 +77,12 @@ public class HandleComplaint extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 if (validateSuspension()){
-                                    Chef suspendedChef = complaint.getAssociatedChef();
-                                    suspendedChef.setSuspensionLength(Integer.parseInt(txtLengthOfSuspension.getText().toString()));
-                                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+                                    int suspentionLength = Integer.parseInt(txtLengthOfSuspension.getText().toString());
+
+                                    dateAfterNumDays(suspentionLength);
+//                                    Chef suspendedChef = complaint.getAssociatedChef();
+//                                    suspendedChef.setSuspensionLength(Integer.parseInt(txtLengthOfSuspension.getText().toString()));
+//                                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                                 }
 
                             }
@@ -111,6 +118,19 @@ public class HandleComplaint extends AppCompatActivity {
         }
 
         return isValid;
+    }
+
+    private String dateAfterNumDays(int numDays) {
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = "";
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DATE, numDays);
+        formattedDate = dateFormat.format(c.getTime());
+
+        return formattedDate;
     }
 
     private void populateFields(Complaint complaint) {

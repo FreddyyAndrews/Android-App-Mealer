@@ -50,11 +50,12 @@ public class RegisterClient extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String dbIdEmail = currentUser.getEmail().replace('.', '~');
                 if(validate()){
-                    try{
-                        appDatabaseReference.child(currentUser.getUid()).child("card number").setValue(inputCardNumber.getText().toString());
-                        appDatabaseReference.child(currentUser.getUid()).child("Expiry Date").setValue(inputExpDate.getText().toString());
-                        appDatabaseReference.child(currentUser.getUid()).child("CVV").setValue(inputCvv.getText().toString());
+                    try {
+                        appDatabaseReference.child(dbIdEmail).child("card number").setValue(inputCardNumber.getText().toString());
+                        appDatabaseReference.child(dbIdEmail).child("Expiry Date").setValue(inputExpDate.getText().toString());
+                        appDatabaseReference.child(dbIdEmail).child("CVV").setValue(inputCvv.getText().toString());
                         Toast.makeText(RegisterClient.this, "Updated successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent( RegisterClient.this, LoggedInActivity.class));
                     }catch(Exception e){
@@ -68,38 +69,20 @@ public class RegisterClient extends AppCompatActivity {
     //Validates user entries and sets the correct error to the text fields
     private boolean validate(){
         Boolean isValid = true;
-        try{
-            long creditCardNumber = Long.parseLong(inputCardNumber.getText().toString());
-        }catch (Exception e){
-            inputCardNumber.setError("Invalid Card Number");
-            isValid= false;
-        }
-        try{
-            int expDate = Integer.parseInt(inputExpDate.getText().toString());
-        }catch (Exception e){
-            inputExpDate.setError("Invalid Expiry Date");
-            isValid= false;
-        }
-        try{
-            int cvv = Integer.parseInt(inputCvv.getText().toString());
-        }catch (Exception e){
-            inputCvv.setError("Invalid CVV");
-            isValid= false;
-        }
         String creditCardNumber = inputCardNumber.getText().toString();
         String expDate = inputExpDate.getText().toString();
         String cvv = inputCvv.getText().toString();
 
-        if(creditCardNumber.length() < 15 || creditCardNumber.length() > 16){
-            inputCardNumber.setError("Invalid Card Number");
+        if(creditCardNumber.length() < 15){
+            inputCardNumber.setError("Card number needs to be 15 digits in length");
             isValid= false;
         }
-        if(expDate.length() != 4 ){
-            inputExpDate.setError("Invalid Expiry Date");
+        if(expDate.length() < 4 ){
+            inputExpDate.setError("Expiry date needs to be 4 digit in length");
             isValid= false;
         }
-        if(cvv.length() != 3){
-            inputCvv.setError("Invalid CVV");
+        if(cvv.length() < 3){
+            inputCvv.setError("CVV needs to be 3 digits in length");
             isValid= false;
         }
 

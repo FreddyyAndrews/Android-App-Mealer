@@ -40,14 +40,12 @@ public class LoggedInActivity extends AppCompatActivity {
         appDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String type = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String firstName = snapshot.child(currentUser.getUid()).child("firstName").getValue(String.class);
-                String lastName = snapshot.child(currentUser.getUid()).child("lastName").getValue(String.class);
-                String address = snapshot.child(currentUser.getUid()).child("addresss").getValue(String.class);
-                String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
+                String dbIdEmail = currentUser.getEmail().replace('.', '~');
+                String type = snapshot.child(dbIdEmail).child("type").getValue(String.class);
+
                 //Sends Chef to Chef activity
                 if(type.equals("chef")){
-                    if(snapshot.child(currentUser.getUid()).child("suspensionLength").getValue(Integer.class).equals(0) && !snapshot.child(currentUser.getUid()).child("banned").getValue(Boolean.class)){
+                    if(snapshot.child(dbIdEmail).child("suspensionLength").getValue(Integer.class).equals(0) && !snapshot.child(dbIdEmail).child("banned").getValue(Boolean.class)){
                         startActivity(new Intent( LoggedInActivity.this, ChefActivity.class));
                     }else{
                         startActivity(new Intent( LoggedInActivity.this, ChefBannedOrSuspended.class));
@@ -56,7 +54,6 @@ public class LoggedInActivity extends AppCompatActivity {
                 }else if(type.equals("client")){
                     startActivity(new Intent( LoggedInActivity.this, ClientActivity.class));
                 }
-                //welcomeMsg.setText("Welcome " + firstName + " you are signed-in as a " + type + "!");
                 welcomeMsg.setText("Loading...");
             }
 

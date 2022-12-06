@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -73,7 +74,6 @@ public class MakeComplaintActivity extends AppCompatActivity {
             checker = false;
             edtTxtDescribe.setError("Field is Mandatory");
         }
-        //TODO check if chef actually exists in db
 
         return checker;
 

@@ -57,9 +57,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        //TODO get complaints from DB
-        //This is just an example for testing
-
+        // Get complaint list from DB
         appDatabaseReference.child("complaints").addListenerForSingleValueEvent(
             new ValueEventListener() {
                 @Override

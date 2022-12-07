@@ -108,8 +108,10 @@ public class HandleComplaint extends AppCompatActivity {
     private boolean validateSuspension(){
         Boolean isValid = true;
         String suspentionLength = txtLengthOfSuspension.getText().toString();
-        double nbSuspentionLength = Double.parseDouble(suspentionLength);
-
+        double nbSuspentionLength = 0;
+        if (!suspentionLength.isEmpty()) {
+            nbSuspentionLength = Double.parseDouble(suspentionLength);
+        }
         if (suspentionLength.isEmpty()) {
             isValid = false;
             txtLengthOfSuspension.setError("Field is Mandatory");

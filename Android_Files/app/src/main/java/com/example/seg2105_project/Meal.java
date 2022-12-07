@@ -1,17 +1,18 @@
 package com.example.seg2105_project;
 
 public class Meal {
-    private String mealName;
-    private double price;
-    private String mealType; // e.g. main dish, soup, desert, etc..
-    private String cuisineType; // e.g. Italian, Chinese, Greek, etc..
-    private String[] listOfIngredients;
-    private String[] allergens;
-    private String description;
-    private boolean currentlyOffered;
+    public String mealName;
+    public String price;
+    public String mealType; // e.g. main dish, soup, desert, etc..
+    public String cuisineType; // e.g. Italian, Chinese, Greek, etc..
+    public String listOfIngredients;
+    public String allergens;
+    public String description;
+    public boolean currentlyOffered;
+    public String associatedChefEmail;
 
-    public Meal(String mealName, double price, String mealType, String cuisineType, String[] listOfIngredients,
-                String[] allergens, String description, boolean currentlyOffered){
+    public Meal(String mealName, String price, String mealType, String cuisineType, String listOfIngredients,
+                String allergens, String description, boolean currentlyOffered, String associatedChef){
         this.mealName = mealName;
         this.price = price;
         this.mealType = mealType;
@@ -20,5 +21,10 @@ public class Meal {
         this.allergens = allergens;
         this.description = description;
         this.currentlyOffered = currentlyOffered;
+        this.associatedChefEmail = associatedChef;
+    }
+
+    public void setCurrentlyOfferedState(boolean state ) {
+        this.currentlyOffered = state;
     }
 }

@@ -50,7 +50,7 @@ public class HandleComplaint extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
+                        for (DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
                             Complaint complaint = complaintSnapshot.getValue(Complaint.class);
                             complaintList.push(complaint);
                         }
@@ -78,8 +78,9 @@ public class HandleComplaint extends AppCompatActivity {
                             public void onClick(View view) {
                                 if (validateSuspension()){
                                     int suspentionLength = Integer.parseInt(txtLengthOfSuspension.getText().toString());
-
                                     dateAfterNumDays(suspentionLength);
+                                    // TODO: Update with real db values
+                                    // TODO: Update db once complaint is dealt with
 //                                    Chef suspendedChef = complaint.getAssociatedChef();
 //                                    suspendedChef.setSuspensionLength(Integer.parseInt(txtLengthOfSuspension.getText().toString()));
 //                                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));

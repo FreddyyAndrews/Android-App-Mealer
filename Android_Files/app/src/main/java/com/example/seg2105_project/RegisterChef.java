@@ -90,11 +90,11 @@ public class RegisterChef extends AppCompatActivity {
     //Adds chefs description to db
     //TODO add chefs void cheque to db
     public boolean addChefSpecificInfoToDB(String description, Drawable voidCheque) {
-
-       try{
-           appDatabaseReference.child(currentUser.getUid()).child("description").setValue(description);
+        String dbIdEmail = currentUser.getUid().replace('.', '~');
+       try {
+           appDatabaseReference.child(dbIdEmail).child("description").setValue(description);
            return true;
-       }catch(Exception e){
+       } catch(Exception e) {
            return false;
        }
     }

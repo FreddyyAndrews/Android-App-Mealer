@@ -17,7 +17,7 @@ public class AddMenuActivity extends AppCompatActivity {
     //Widgets and firebase
     Button btnDiscard;
     Button btnSubmit;
-    EditText inputMealName, inputMealType, inputCuisineType, inputListOfIngredients , inputPrice;
+    EditText inputMealName, inputMealType, inputCuisineType, inputListOfIngredients , inputPrice, inputAllergens,edtTxtDescribe;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
     private DatabaseReference appDatabaseReference;
@@ -32,11 +32,13 @@ public class AddMenuActivity extends AppCompatActivity {
         inputMealType = findViewById(R.id.inputMealType);
         inputListOfIngredients = findViewById(R.id.inputListOfIngredients);
         inputPrice = findViewById(R.id.inputPrice);
+        inputAllergens = findViewById(R.id.inputAllergens);
+        edtTxtDescribe = findViewById(R.id.edtTxtDescribe);
 
         //Firebase Set-Up
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
-        appDatabaseReference = FirebaseDatabase.getInstance().getReference("people");
+        appDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
         btnDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +51,15 @@ public class AddMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validate()){
-                    try{
+                    try {
+                        String name = inputMealName.getText().toString();
+                        String cuisineType = inputCuisineType.getText().toString();
+                        String type = inputMealType.getText().toString();
+                        String ingredients = inputListOfIngredients.getText().toString();
+                        String price = inputPrice.getText().toString();
+                        String allergens = inputAllergens.getText().toString();
+                        String description = edtTxtDescribe.getText().toString();
+                        Meal newMeal = new Meal(name, price, type, cuisineType, ingredients, allergens, description, true, currentUser.getEmail().toString());
                         //TODO add meal to db
 
                     }catch(Exception e){
@@ -67,12 +77,6 @@ public class AddMenuActivity extends AppCompatActivity {
         String listOfIngredients = inputListOfIngredients.getText().toString();
         String mealType = inputMealType.getText().toString();
 
-        try{
-            double dPrice = Double.parseDouble(price);
-        }catch(Exception e){
-            inputPrice.setError("Input Valid Price");
-            returnVal = false;
-        }
         if(cuisineType.equals("")){
             inputCuisineType.setError("Field is Mandatory");
             returnVal = false;

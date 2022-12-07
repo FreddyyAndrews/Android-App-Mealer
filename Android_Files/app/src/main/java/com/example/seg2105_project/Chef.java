@@ -13,8 +13,8 @@ public class Chef extends User {
 
     public Chef() {}
 
-    public Chef(String firstName, String lastName, String email, String address, String type, String id){
-        super(firstName, lastName, email, address, type, id);
+    public Chef(String firstName, String lastName, String email, String address, String type){
+        super(firstName, lastName, email, address, type);
         this.suspensionLength = 0;
         this.isBanned = false;
         this.description = "";
@@ -46,7 +46,6 @@ public class Chef extends User {
     public double getRating(){
         return this.rating;
     }
-    public String getId() { return this.id; }
 
     // Setting Chef-specific Attributes
     public void setRating(double rating){

@@ -1,5 +1,6 @@
 package com.example.seg2105_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,9 +59,10 @@ public class HandleComplaint extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Complaint temp;
                         for (DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
-                            Complaint complaint = complaintSnapshot.getValue(Complaint.class);
-                            complaintList.push(complaint);
+                            temp = new Complaint(complaintSnapshot.child("complaintMessage").getValue().toString(), complaintSnapshot.child("email").getValue().toString());
+                            complaintList.push(temp);
                         }
                         Complaint complaint = complaintList.peek();
                         populateFields(complaint);
@@ -68,8 +72,32 @@ public class HandleComplaint extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 String bannedChef = complaint.getEmail();
+                                String bannedChefId = bannedChef.replace('.', '~');
+                                appDatabaseReference.child("people").child(bannedChefId).addListenerForSingleValueEvent(
+                                    new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            Chef updatedChef = new Chef(
+                                              dataSnapshot.child("firstName").getValue().toString(),
+                                              dataSnapshot.child("lastName").getValue().toString(),
+                                              dataSnapshot.child("email").getValue().toString(),
+                                              dataSnapshot.child("address").getValue().toString(),
+                                              dataSnapshot.child("type").getValue().toString()
+                                            );
+                                            updatedChef.setBanned(true);
+                                            updatedChef.setDescription(dataSnapshot.child("description").getValue().toString());
+                                            updatedChef.setRating(Double.parseDouble(dataSnapshot.child("rating").getValue().toString()));
+                                            updatedChef.setNumMealsSold(Integer.parseInt(dataSnapshot.child("numMealsSold").getValue().toString()));
+
+                                            appDatabaseReference.child("people").child(bannedChefId).setValue(updatedChef);
+                                        }
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                            //handle databaseError
+                                        }
+                                });
                                 //bannedChef.setBanned(true);
-                                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+//                                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                             }
                         });
 

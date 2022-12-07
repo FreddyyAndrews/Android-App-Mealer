@@ -2,18 +2,17 @@ package com.example.seg2105_project;
 public class User extends Object {
 
     //Instance Variables
-    public String firstName, lastName, email, address, type, id;
+    public String firstName, lastName, email, address, type;
 
     //Constructors
     public User() {}
 
-    public User (String firstName, String lastName, String email, String address, String type, String id) {
+    public User (String firstName, String lastName, String email, String address, String type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
         this.type = type;
-        this.id = id;
     }
 
     //Getters and Setters

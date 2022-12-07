@@ -3,7 +3,7 @@ package com.example.seg2105_project;
 public class Complaint {
 
     private String complaintMessage;
-    public String associatedChefEmail;
+    private String associatedChefEmail;
 
     public Complaint(String complaintMessage, String associatedChefEmail ){
         this.complaintMessage = complaintMessage;

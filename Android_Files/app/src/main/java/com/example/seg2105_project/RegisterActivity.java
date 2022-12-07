@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if(addUserInfoToDB(user.getUid() , inFName, inLName, inEmail, inAddress, type)) {
+                        if(addUserInfoToDB(inFName, inLName, inEmail, inAddress, type)) {
                             if (type == "chef")  {
                                 startActivity(new Intent( RegisterActivity.this, RegisterChef.class));
                             } else {
@@ -108,9 +108,9 @@ public class RegisterActivity extends AppCompatActivity {
             });
     }
 
-    public boolean addUserInfoToDB(String id, String firstName, String lastName, String email, String address, String type) {
+    public boolean addUserInfoToDB(String firstName, String lastName, String email, String address, String type) {
         String dbIdEmail = email.replace('.', '~');
-        User newPerson = type == "chef" ? new Chef(firstName, lastName, email, address, type, id) : new Client(firstName, lastName, email, address, type, id);
+        User newPerson = type == "chef" ? new Chef(firstName, lastName, email, address, type) : new Client(firstName, lastName, email, address, type);
         try {
             appDatabaseReference.child("people").child(dbIdEmail).setValue(newPerson);
             return  true;

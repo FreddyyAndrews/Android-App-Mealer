@@ -91,7 +91,7 @@
                 android:drawableLeft="@drawable/ic_baseline_edit_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="Chef's Full Name"
+                android:hint="Chef's Full Name (Optional)"
                 android:inputType="text"
                 android:paddingLeft="20dp"
                 android:paddingTop="13dp"

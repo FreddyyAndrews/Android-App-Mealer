@@ -18,6 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class ChefBannedOrSuspended extends AppCompatActivity {
     Button btnSignOut;
     TextView txtMessage;
@@ -45,17 +49,14 @@ public class ChefBannedOrSuspended extends AppCompatActivity {
         appDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String type = snapshot.child(currentUser.getUid()).child("type").getValue(String.class);
-                String firstName = snapshot.child(currentUser.getUid()).child("firstName").getValue(String.class);
-                String lastName = snapshot.child(currentUser.getUid()).child("lastName").getValue(String.class);
-                String address = snapshot.child(currentUser.getUid()).child("addresss").getValue(String.class);
-                String email = snapshot.child(currentUser.getUid()).child("email").getValue(String.class);
-                boolean isBanned = snapshot.child(currentUser.getUid()).child("banned").getValue(Boolean.class);
-                String lengthOfSuspension = snapshot.child(currentUser.getUid()).child("suspensionLength").getValue(Integer.class).toString();
+                String dbIdEmail = currentUser.getEmail().replace('.', '~');
+
+                boolean isBanned = snapshot.child(dbIdEmail).child("banned").getValue(Boolean.class);
+                int lengthOfSuspension = snapshot.child(dbIdEmail).child("suspensionLength").getValue(Integer.class);
                 if(isBanned){
                     txtMessage.setText("You are banned");
                 }else{
-                    txtMessage.setText("You are suspended for " + lengthOfSuspension +" days." );
+                    txtMessage.setText("You are suspended until " + dateAfterNumDays(lengthOfSuspension));
                 }
             }
 
@@ -67,5 +68,18 @@ public class ChefBannedOrSuspended extends AppCompatActivity {
 
 
 
+    }
+
+    private String dateAfterNumDays(int numDays) {
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = "";
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DATE, numDays);
+        formattedDate = dateFormat.format(c.getTime());
+
+        return formattedDate;
     }
 }

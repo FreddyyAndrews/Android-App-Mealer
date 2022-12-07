@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
@@ -37,6 +40,7 @@ public class HandleComplaint extends AppCompatActivity {
     Button btnBan, btnDismiss, btnSuspend;
     EditText txtLengthOfSuspension;
     Complaint complaint;
+    String ID ;
     TextView txtChefName;
     TextView txtChefEmail;
     TextView txtDescription;
@@ -66,6 +70,7 @@ public class HandleComplaint extends AppCompatActivity {
                         }
                         Complaint complaint = complaintList.peek();
                         populateFields(complaint);
+                        ID = complaint.getEmail().replace('.', '~');
 
 
                         btnBan.setOnClickListener(new View.OnClickListener() {
@@ -90,20 +95,21 @@ public class HandleComplaint extends AppCompatActivity {
                                             updatedChef.setNumMealsSold(Integer.parseInt(dataSnapshot.child("numMealsSold").getValue().toString()));
 
                                             appDatabaseReference.child("people").child(bannedChefId).setValue(updatedChef);
+                                            startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                                         }
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
-                                            //handle databaseError
+                                            Toast.makeText(HandleComplaint.this, "Failed to Ban Chef.", Toast.LENGTH_SHORT).show();
                                         }
                                 });
-                                //bannedChef.setBanned(true);
-//                                startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+                                deleteComplaintFromDB();
                             }
                         });
 
                         btnDismiss.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                deleteComplaintFromDB();
                                 startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                             }
                         });
@@ -112,16 +118,39 @@ public class HandleComplaint extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 if (validateSuspension()){
-                                    int suspentionLength = Integer.parseInt(txtLengthOfSuspension.getText().toString());
-                                    dateAfterNumDays(suspentionLength);
-                                    // TODO: Update with real db values
-                                    // TODO: Update db once complaint is dealt with
-//                                    Chef suspendedChef = complaint.getAssociatedChef();
-//                                    suspendedChef.setSuspensionLength(Integer.parseInt(txtLengthOfSuspension.getText().toString()));
-//                                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
-                                }
+                                    int suspensionLength = Integer.parseInt(txtLengthOfSuspension.getText().toString());
 
+                                    String susChef = complaint.getEmail();
+                                    String susChefId = susChef.replace('.', '~');
+                                    appDatabaseReference.child("people").child(susChefId).addListenerForSingleValueEvent(
+                                            new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    Chef updatedChef = new Chef(
+                                                            dataSnapshot.child("firstName").getValue().toString(),
+                                                            dataSnapshot.child("lastName").getValue().toString(),
+                                                            dataSnapshot.child("email").getValue().toString(),
+                                                            dataSnapshot.child("address").getValue().toString(),
+                                                            dataSnapshot.child("type").getValue().toString()
+                                                    );
+                                                    updatedChef.setBanned(false);
+                                                    updatedChef.setSuspensionLength(suspensionLength);
+                                                    updatedChef.setDescription(dataSnapshot.child("description").getValue().toString());
+                                                    updatedChef.setRating(Double.parseDouble(dataSnapshot.child("rating").getValue().toString()));
+                                                    updatedChef.setNumMealsSold(Integer.parseInt(dataSnapshot.child("numMealsSold").getValue().toString()));
+
+                                                    appDatabaseReference.child("people").child(susChefId).setValue(updatedChef);
+                                                    startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
+                                                }
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    Toast.makeText(HandleComplaint.this, "Failed to suspend chef.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                                deleteComplaintFromDB();
                             }
+
                         });
 
 
@@ -172,12 +201,33 @@ public class HandleComplaint extends AppCompatActivity {
     }
 
     private void populateFields(Complaint complaint) {
-        txtChefName = (TextView) findViewById(R.id.txtChefName);
+
         txtChefEmail = (TextView) findViewById(R.id.txtChefEmail);
         txtDescription = (TextView) findViewById(R.id.txtDescription);
 
-        //txtChefName.setText("Chef Name: " + complaint.getAssociatedChef().firstName + " " + complaint.getAssociatedChef().lastName);
+
         txtChefEmail.setText("Chef Email: " + complaint.getEmail());
         txtDescription.setText(complaint.getComplaintMessage());
+    }
+
+    private void deleteComplaintFromDB(){
+    //Deletes complaint from DB
+
+        Query findComplaint = appDatabaseReference.child("complaints").child(ID);
+
+        findComplaint.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot complaintSnapshot: dataSnapshot.getChildren()) {
+                    complaintSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(HandleComplaint.this, "Failed to remove Complaint from DB.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

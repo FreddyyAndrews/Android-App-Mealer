@@ -34,6 +34,7 @@ public class MakeComplaintActivity extends AppCompatActivity {
     EditText edtTxtDescribe,inputChefName, inputChefEmail;
     private DatabaseReference appDatabaseReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,25 +57,19 @@ public class MakeComplaintActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
-                   createComplaint();
-                   startActivity(new Intent( MakeComplaintActivity.this, ClientActivity.class));
-                }
+                validate();
             }
         });
     }
 
-    private boolean validate(){
-
-        String chefName = inputChefName.getText().toString();
-        String chefEmail = inputChefEmail.getText().toString();
-        String description = edtTxtDescribe.getText().toString();
+    private void validate(){
         boolean checker = true;
 
-        if(chefName.equals("")){
-            checker = false;
-            inputChefName.setError("Field is Mandatory");
-        }
+        String chefEmail = inputChefEmail.getText().toString();
+        String chefID = chefEmail.replace('.', '~');
+        String description = edtTxtDescribe.getText().toString();
+        checker = true;
+        
         if(chefEmail.equals("")){
             checker = false;
             inputChefEmail.setError("Field is Mandatory");
@@ -84,9 +79,33 @@ public class MakeComplaintActivity extends AppCompatActivity {
             edtTxtDescribe.setError("Field is Mandatory");
         }
 
-        return checker;
+        if(checker){
+
+            appDatabaseReference.child("people").child(chefID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (!snapshot.exists()) {
+
+                        inputChefEmail.setError("Enter Valid Chef Email");
+                    }else{
+                        createComplaint();
+                        startActivity(new Intent( MakeComplaintActivity.this, ClientActivity.class));
+                    }
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                    inputChefEmail.setError("Enter Valid Chef Email");
+                }
+
+
+
+            });
+        }
 
     }
+
 
     private void createComplaint(){
 
@@ -96,7 +115,7 @@ public class MakeComplaintActivity extends AppCompatActivity {
         if(addComplaintToDB(chefEmail, description)) {
             Toast.makeText(MakeComplaintActivity.this, "Submitted Complaint successfully", Toast.LENGTH_SHORT).show();
         } else{
-            // If sign in fails, display a message to the user.
+            // If creating complaint in fails, display a message to the user.
 
             Toast.makeText(MakeComplaintActivity.this, "Failed to create new user.", Toast.LENGTH_SHORT).show();
         }

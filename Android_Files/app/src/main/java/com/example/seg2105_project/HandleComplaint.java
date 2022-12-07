@@ -25,6 +25,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Stack;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HandleComplaint extends AppCompatActivity {
     Button btnBan, btnDismiss, btnSuspend;
@@ -35,6 +39,8 @@ public class HandleComplaint extends AppCompatActivity {
     TextView txtDescription;
     private DatabaseReference appDatabaseReference;
     Stack<Complaint> complaintList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +60,15 @@ public class HandleComplaint extends AppCompatActivity {
                             Complaint complaint = complaintSnapshot.getValue(Complaint.class);
                             complaintList.push(complaint);
                         }
-                        Complaint currentComplaint = complaintList.peek();
-                        populateFields(currentComplaint);
+                        Complaint complaint = complaintList.peek();
+                        populateFields(complaint);
+
 
                         btnBan.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Chef bannedChef = complaint.getAssociatedChef();
-                                bannedChef.setBanned(true);
+                                String bannedChef = complaint.getEmail();
+                                //bannedChef.setBanned(true);
                                 startActivity(new Intent( HandleComplaint.this, AdminActivity.class));
                             }
                         });
@@ -139,8 +146,8 @@ public class HandleComplaint extends AppCompatActivity {
         txtChefEmail = (TextView) findViewById(R.id.txtChefEmail);
         txtDescription = (TextView) findViewById(R.id.txtDescription);
 
-        txtChefName.setText("Chef Name: " + complaint.getAssociatedChef().firstName + " " + complaint.getAssociatedChef().lastName);
-        txtChefEmail.setText("Chef Email: " + complaint.getAssociatedChef().email);
+        //txtChefName.setText("Chef Name: " + complaint.getAssociatedChef().firstName + " " + complaint.getAssociatedChef().lastName);
+        txtChefEmail.setText("Chef Email: " + complaint.getEmail());
         txtDescription.setText(complaint.getComplaintMessage());
     }
 }

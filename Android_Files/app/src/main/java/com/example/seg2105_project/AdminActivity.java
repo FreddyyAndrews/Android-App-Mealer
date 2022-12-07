@@ -68,9 +68,12 @@ public class AdminActivity extends AppCompatActivity {
                     }
                     ArrayList complaintListDisplay = new ArrayList();
                     for (int i = 0; i < complaintList.size(); i++) {
-                        complaintListDisplay.add(complaintList.get(i).getAssociatedChef().email);
+                        complaintListDisplay.add(complaintList.get(i).getEmail());
+                        System.out.println(complaintListDisplay.get(i));
+                        System.out.println(complaintList.get(i));
                     }
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(AdminActivity.this, R.layout.row, complaintListDisplay);
+
+                   ArrayAdapter arrayAdapter = new ArrayAdapter(AdminActivity.this, R.layout.row, complaintListDisplay);
                     viewComplaints.setAdapter(arrayAdapter);
                 }
                 @Override

@@ -94,7 +94,6 @@ public class MakeComplaintActivity extends AppCompatActivity {
         String description = edtTxtDescribe.getText().toString();
 
         if(addComplaintToDB(chefEmail, description)) {
-
             Toast.makeText(MakeComplaintActivity.this, "Submitted Complaint successfully", Toast.LENGTH_SHORT).show();
         } else{
             // If sign in fails, display a message to the user.
@@ -108,7 +107,7 @@ public class MakeComplaintActivity extends AppCompatActivity {
 
     public boolean addComplaintToDB(String chefEmail, String description){
         String dbIdEmail = chefEmail.replace('.', '~');
-        Complaint newComplaint = new Complaint(description,chefEmail);
+        Complaint newComplaint = new Complaint( description, chefEmail);
         try {
             appDatabaseReference.child("complaints").child(dbIdEmail).setValue(newComplaint);
             return  true;

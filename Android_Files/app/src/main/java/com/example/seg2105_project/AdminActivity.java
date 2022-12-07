@@ -62,15 +62,12 @@ public class AdminActivity extends AppCompatActivity {
             new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
-                        Complaint complaint = complaintSnapshot.getValue(Complaint.class);
-                        complaintList.push(complaint);
-                    }
+                    Complaint temp;
                     ArrayList complaintListDisplay = new ArrayList();
-                    for (int i = 0; i < complaintList.size(); i++) {
-                        complaintListDisplay.add(complaintList.get(i).getEmail());
-                        System.out.println(complaintListDisplay.get(i));
-                        System.out.println(complaintList.get(i));
+                    for(DataSnapshot complaintSnapshot : dataSnapshot.getChildren()) {
+                        temp = new Complaint(complaintSnapshot.child("complaintMessage").getValue().toString(), complaintSnapshot.child("email").getValue().toString());
+                        complaintListDisplay.add(temp.getEmail());
+                        complaintList.push(temp);
                     }
 
                    ArrayAdapter arrayAdapter = new ArrayAdapter(AdminActivity.this, R.layout.row, complaintListDisplay);

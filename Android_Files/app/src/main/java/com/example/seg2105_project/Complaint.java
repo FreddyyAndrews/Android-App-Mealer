@@ -3,14 +3,14 @@ package com.example.seg2105_project;
 public class Complaint {
 
     private String complaintMessage;
-    private String associatedChefEmail;
+    public String associatedChefEmail;
 
     public Complaint(String complaintMessage, String associatedChefEmail ){
         this.complaintMessage = complaintMessage;
         this.associatedChefEmail = associatedChefEmail;
     }
 
-    public Complaint(){
+    public Complaint() {
 
     }
 

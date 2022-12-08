@@ -187,18 +187,6 @@ public class HandleComplaint extends AppCompatActivity {
         return isValid;
     }
 
-    private String dateAfterNumDays(int numDays) {
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-        String formattedDate = "";
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(today);
-        c.add(Calendar.DATE, numDays);
-        formattedDate = dateFormat.format(c.getTime());
-
-        return formattedDate;
-    }
 
     private void populateFields(Complaint complaint) {
 

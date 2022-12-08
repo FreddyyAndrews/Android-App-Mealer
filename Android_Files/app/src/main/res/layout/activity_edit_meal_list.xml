@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
-                android:text="Edit Meal List"
+                android:text="Meal List"
                 android:textColor="@color/white"
                 android:textSize="44sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
                 app:layout_constraintVertical_bias="0.908" />
 
             <ListView
-                android:id="@+id/viewComplaints"
+                android:id="@+id/viewMenu"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="25dp"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="4dp"
-                android:text="This is your Menu. "
+                android:text="This is your Meal list. "
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="24dp"
-                android:text="Tap Items to add or remove them from your Meal List."
+                android:text="These Meals are currently offered to the public"
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"

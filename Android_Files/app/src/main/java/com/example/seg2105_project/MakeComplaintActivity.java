@@ -69,7 +69,7 @@ public class MakeComplaintActivity extends AppCompatActivity {
         String chefID = chefEmail.replace('.', '~');
         String description = edtTxtDescribe.getText().toString();
         checker = true;
-        
+
         if(chefEmail.equals("")){
             checker = false;
             inputChefEmail.setError("Field is Mandatory");

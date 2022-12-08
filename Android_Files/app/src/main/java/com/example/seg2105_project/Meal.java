@@ -27,4 +27,8 @@ public class Meal {
     public void setCurrentlyOfferedState(boolean state ) {
         this.currentlyOffered = state;
     }
+    public String getMealName(){return mealName;}
+    public String getAssociatedChefEmail(){return associatedChefEmail;}
+    public boolean getCurrentlyOffered(){return currentlyOffered;}
+
 }

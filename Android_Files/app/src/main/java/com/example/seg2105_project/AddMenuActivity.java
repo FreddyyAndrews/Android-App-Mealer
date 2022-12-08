@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +22,7 @@ public class AddMenuActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
     private DatabaseReference appDatabaseReference;
+    private String chefID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,9 @@ public class AddMenuActivity extends AppCompatActivity {
         inputPrice = findViewById(R.id.inputPrice);
         inputAllergens = findViewById(R.id.inputAllergens);
         edtTxtDescribe = findViewById(R.id.edtTxtDescribe);
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        chefID = currentUser.getEmail().replace('.', '~');
 
         //Firebase Set-Up
         firebaseAuth = FirebaseAuth.getInstance();
@@ -59,11 +64,12 @@ public class AddMenuActivity extends AppCompatActivity {
                         String price = inputPrice.getText().toString();
                         String allergens = inputAllergens.getText().toString();
                         String description = edtTxtDescribe.getText().toString();
-                        Meal newMeal = new Meal(name, price, type, cuisineType, ingredients, allergens, description, true, currentUser.getEmail().toString());
-                        //TODO add meal to db
+                        Meal newMeal = new Meal(name, price, type, cuisineType, ingredients, allergens, description, false, currentUser.getEmail().toString());
+                        createMenuItem(newMeal);
+                        startActivity(new Intent( AddMenuActivity.this, EditMenuActivity.class));
 
                     }catch(Exception e){
-                        //TODO give error message
+                        Toast.makeText(AddMenuActivity.this, "Failed Making Menu Item", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -99,5 +105,31 @@ public class AddMenuActivity extends AppCompatActivity {
         }
 
         return returnVal;
+    }
+
+    private void createMenuItem(Meal newMeal){
+
+
+        if(addMenuItemToDB(newMeal)) {
+            Toast.makeText(AddMenuActivity.this, "Created Menu Item Successfully", Toast.LENGTH_SHORT).show();
+        } else{
+            // If creating complaint in fails, display a message to the user.
+
+            Toast.makeText(AddMenuActivity.this, "Failed to create Menu Item.", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+
+    public boolean addMenuItemToDB(Meal newMeal){
+
+        try {
+            appDatabaseReference.child("meals").child(chefID+"_"+newMeal.getMealName()).setValue(newMeal);
+            return  true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
     }
 }

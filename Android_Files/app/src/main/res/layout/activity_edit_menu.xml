@@ -85,7 +85,7 @@
                 app:layout_constraintVertical_bias="0.105" />
 
             <ListView
-                android:id="@+id/viewComplaints"
+                android:id="@+id/viewMenu"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="25dp"

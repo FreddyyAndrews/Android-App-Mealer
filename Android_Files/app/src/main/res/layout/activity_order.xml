@@ -36,7 +36,7 @@
                 android:background="@drawable/input_bg"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="Search Here"
+                android:hint="Search By Meal Name"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="20dp"
                 android:paddingTop="13dp"
@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ListView
-                android:id="@+id/viewComplaints"
+                android:id="@+id/viewMenu"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="25dp"
@@ -94,30 +94,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.478"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchBar" />
-
-            <Switch
-                android:id="@+id/chooser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="Search by Meal Name"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchBar" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="40dp"
-                android:text="Search by Chef Name"
-
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/chooser"
                 app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

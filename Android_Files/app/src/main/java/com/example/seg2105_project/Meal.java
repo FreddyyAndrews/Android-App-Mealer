@@ -30,5 +30,11 @@ public class Meal {
     public String getMealName(){return mealName;}
     public String getAssociatedChefEmail(){return associatedChefEmail;}
     public boolean getCurrentlyOffered(){return currentlyOffered;}
+    public String getPrice(){return  price;}
+    public String getMealType(){return mealType;}
+    public String getCuisineType(){return cuisineType;}
+    public String getListOfIngredients(){return listOfIngredients;}
+    public String getAllergens(){return allergens;}
+    public String getDescription(){return description;}
 
 }

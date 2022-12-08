@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Locale;
+
 public class AddMenuActivity extends AppCompatActivity {
     //Widgets and firebase
     Button btnDiscard;
@@ -57,7 +59,7 @@ public class AddMenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(validate()){
                     try {
-                        String name = inputMealName.getText().toString();
+                        String name = inputMealName.getText().toString().toLowerCase();
                         String cuisineType = inputCuisineType.getText().toString();
                         String type = inputMealType.getText().toString();
                         String ingredients = inputListOfIngredients.getText().toString();

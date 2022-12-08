@@ -70,9 +70,9 @@ public class ChefBannedOrSuspended extends AppCompatActivity {
 
     }
 
-    private String dateAfterNumDays(int numDays) {
+    public String dateAfterNumDays(int numDays) {
         Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = "";
 
         Calendar c = Calendar.getInstance();

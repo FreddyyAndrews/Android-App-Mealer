@@ -117,7 +117,7 @@ public class HandleComplaint extends AppCompatActivity {
                         btnSuspend.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                if (validateSuspension()){
+                                if (validateSuspension(txtLengthOfSuspension.getText().toString())){
                                     int suspensionLength = Integer.parseInt(txtLengthOfSuspension.getText().toString());
 
                                     String susChef = complaint.getEmail();
@@ -162,9 +162,8 @@ public class HandleComplaint extends AppCompatActivity {
                 });
     }
 
-    private boolean validateSuspension(){
+    public boolean validateSuspension(String suspentionLength){
         Boolean isValid = true;
-        String suspentionLength = txtLengthOfSuspension.getText().toString();
         double nbSuspentionLength = 0;
         if (!suspentionLength.isEmpty()) {
             nbSuspentionLength = Double.parseDouble(suspentionLength);
@@ -198,7 +197,7 @@ public class HandleComplaint extends AppCompatActivity {
         txtDescription.setText(complaint.getComplaintMessage());
     }
 
-    private void deleteComplaintFromDB(){
+    public void deleteComplaintFromDB(){
     //Deletes complaint from DB
 
         Query findComplaint = appDatabaseReference.child("complaints").child(ID);

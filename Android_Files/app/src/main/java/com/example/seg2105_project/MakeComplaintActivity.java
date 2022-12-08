@@ -108,7 +108,6 @@ public class MakeComplaintActivity extends AppCompatActivity {
 
 
     private void createComplaint(){
-
         String chefEmail = inputChefEmail.getText().toString();
         String description = edtTxtDescribe.getText().toString();
 

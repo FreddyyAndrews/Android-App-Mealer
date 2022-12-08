@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validate(){
+    public boolean validate(){
         Boolean isValid = true;
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();

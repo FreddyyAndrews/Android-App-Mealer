@@ -51,7 +51,7 @@ public class RegisterClient extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String dbIdEmail = currentUser.getEmail().replace('.', '~');
-                if(validate()){
+                if( validateCreditInfo(inputCardNumber.getText().toString(), inputExpDate.getText().toString(), inputCvv.getText().toString()) ){
                     try {
                         appDatabaseReference.child(dbIdEmail).child("card number").setValue(inputCardNumber.getText().toString());
                         appDatabaseReference.child(dbIdEmail).child("Expiry Date").setValue(inputExpDate.getText().toString());
@@ -67,13 +67,10 @@ public class RegisterClient extends AppCompatActivity {
         });
     }
     //Validates user entries and sets the correct error to the text fields
-    private boolean validate(){
+    public boolean validateCreditInfo(String cardNb, String expDate, String cvv){
         Boolean isValid = true;
-        String creditCardNumber = inputCardNumber.getText().toString();
-        String expDate = inputExpDate.getText().toString();
-        String cvv = inputCvv.getText().toString();
 
-        if(creditCardNumber.length() < 15){
+        if(cardNb.length() < 15){
             inputCardNumber.setError("Card number needs to be 15 digits in length");
             isValid= false;
         }
